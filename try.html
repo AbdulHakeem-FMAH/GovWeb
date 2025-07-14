@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Government Hospital Resources</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #eef5f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #005b7f;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    main {
+      display: flex;
+      flex: 1;
+    }
+
+    nav {
+      width: 220px;
+      background-color: #007fa3;
+      color: white;
+      padding: 2rem 1rem;
+      min-height: 100%;
+    }
+
+    nav a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 1rem 0;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    nav a:hover {
+      background-color: #005b7f;
+    }
+
+    .content {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    select, input[type="text"], textarea, button {
+      padding: 0.5rem;
+      margin-top: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    button {
+      background-color: #007fa3;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 1.5rem;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007fa3;
+      color: white;
+    }
+
+    footer {
+      background-color: #005b7f;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+      }
+
+      nav {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+      }
+
+      nav a {
+        flex: 1;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Govt Hospital Resource Portal</h1>
+    <img src="https://via.placeholder.com/120x40?text=LOGO" alt="Logo" />
+  </header>
+  <main>
+    <nav>
+      <a href="#home" onclick="loadPage('home')">Home</a>
+      <a href="#hospitals" onclick="loadPage('hospitals')">Hospitals</a>
+      <a href="#specializations" onclick="loadPage('specializations')">Specializations</a>
+      <a href="#cost" onclick="loadPage('cost')">Basic Cost</a>
+      <a href="#location" onclick="loadPage('location')">Location</a>
+      <a href="#emergency" onclick="loadPage('emergency')">Emergency Services</a>
+      <a href="#contact" onclick="loadPage('contact')">Contact</a>
+    </nav>
+    <div class="content">
+      <div class="card" id="main-content">
+        <!-- Content loads here -->
+      </div>
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 Ministry of Health & Family Welfare, Government of India
+  </footer>
+  <script>
+    const pages = {
+      home: `
+        <h2>Welcome to the Hospital Resource Portal</h2>
+        <p>This platform provides verified, up-to-date information on public hospitals, specializations, treatment costs, and emergency care. Navigate through the portal to explore healthcare resources in your state.</p>
+        <ul>
+          <li>Search hospitals and services by region</li>
+          <li>Check medical specialties offered</li>
+          <li>Compare government-regulated treatment costs</li>
+          <li>Locate nearest hospitals and emergency contacts</li>
+        </ul>
+      `,
+      hospitals: `
+        <h2>Government Hospitals Directory</h2>
+        <label>Select State:</label>
+        <select><option>Tamil Nadu</option><option>Karnataka</option><option>Kerala</option></select>
+        <label>Search Hospital Name:</label>
+        <input type="text" placeholder="e.g., Rajiv Gandhi Hospital" />
+        <table>
+          <tr><th>Name</th><th>City</th><th>Type</th><th>Contact</th></tr>
+          <tr><td>Stanley GH</td><td>Chennai</td><td>Multispecialty</td><td>044-22223333</td></tr>
+          <tr><td>Victoria Hospital</td><td>Bangalore</td><td>General</td><td>080-11112222</td></tr>
+        </table>
+      `,
+      specializations: `
+        <h2>Medical Specializations</h2>
+        <label>Choose a specialization:</label>
+        <select><option>Cardiology</option><option>Neurology</option><option>Orthopedics</option><option>Oncology</option></select>
+        <table>
+          <tr><th>Hospital</th><th>City</th><th>Specialty</th><th>Available</th></tr>
+          <tr><td>AIIMS</td><td>Delhi</td><td>Neurology</td><td>Yes</td></tr>
+          <tr><td>CMC</td><td>Vellore</td><td>Cardiology</td><td>Yes</td></tr>
+        </table>
+      `,
+      cost: `
+        <h2>Standard Govt Treatment Costs</h2>
+        <table>
+          <tr><th>Treatment</th><th>Cost (INR)</th><th>Coverage</th></tr>
+          <tr><td>Outpatient Consultation</td><td>Free</td><td>All Govt Hospitals</td></tr>
+          <tr><td>Blood Test</td><td>50</td><td>Basic Pathology</td></tr>
+          <tr><td>X-Ray</td><td>100</td><td>Standard Charges</td></tr>
+          <tr><td>Minor Surgery</td><td>500-2000</td><td>Subject to approval</td></tr>
+        </table>
+      `,
+      location: `
+        <h2>Locate Nearby Hospitals</h2>
+        <label>State:</label>
+        <select><option>Tamil Nadu</option><option>Delhi</option><option>Maharashtra</option></select>
+        <label>City:</label>
+        <select><option>Chennai</option><option>Delhi</option><option>Mumbai</option></select>
+        <ul style="margin-top: 1rem;">
+          <li>Rajiv Gandhi GH - Chennai</li>
+          <li>AIIMS - Delhi</li>
+          <li>JJ Hospital - Mumbai</li>
+        </ul>
+      `,
+      emergency: `
+        <h2>Emergency Services</h2>
+        <p>In case of medical emergencies, contact the following hotlines:</p>
+        <ul>
+          <li><strong>National Emergency Number:</strong> 112</li>
+          <li><strong>Ambulance:</strong> 102</li>
+          <li><strong>Health Helpline:</strong> 1075</li>
+        </ul>
+        <p>All government hospitals are equipped with 24/7 emergency services and trauma care facilities.</p>
+      `,
+      contact: `
+        <h2>Contact Us</h2>
+        <p>Have questions or feedback? Reach out using the form below:</p>
+        <label>Your Name:</label>
+        <input type="text" placeholder="Your full name" />
+        <label>Email Address:</label>
+        <input type="text" placeholder="you@example.com" />
+        <label>Your Message:</label>
+        <textarea rows="5" placeholder="Type your message here..."></textarea>
+        <button>Send Message</button>
+      `
+    };
+
+    function loadPage(page) {
+      document.getElementById('main-content').innerHTML = pages[page];
+    }
+
+    window.onload = () => loadPage('home');
+  </script>
+</body>
+</html>
